@@ -2,7 +2,7 @@
   "profiles": {
     "DefaultArguments.TestApp": {
       "commandName": "Project",
-      "commandLineArgs": "--version"
+      "commandLineArgs": "add "
     }
   }
 }
