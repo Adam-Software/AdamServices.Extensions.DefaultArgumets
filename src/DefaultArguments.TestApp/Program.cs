@@ -15,27 +15,25 @@ namespace DefaultArguments.TestApp
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                  {
-                     services.AddArgumentsParserService();
-                     //services.AddSingleton<IUserArgumentService>(serviceProvider =>
-                     //{
-                     //    CommandLine.Parser parser = serviceProvider.GetRequiredService<IArgumentsParserService>().Parser;
-                     //    parser.ParseArguments<UserArgumentService>(args);
+                     //services.AddArgumentsParserService(args);
 
-                     //    return new UserArgumentService(serviceProvider);
-                     //});
+                     UserArgumentService userArgumentService = new();
+                     services.AddArgumentsParserService(userArgumentService, args);
+                     //services.AddSingleton<IUserArgumentService>(userArgumentService);
+                
                  })
                 
                  .Build();
 
-            UserArgumentService userArgumentService = new();
+            //UserArgumentService userArgumentService = new();
             //host.UseAdamDefaultArguments(args);
-            host.UseAdamDefaultArguments(userArgumentService, args);
+            //host.UseAdamDefaultArguments(typeof(UserArgumentService), args);
             host.RunAsync();
 
-            //var userArguments = host.Services.GetService<IUserArgumentService>();
-            //var logger = host.Services.GetService<ILogger<Program>>();
+            var userArguments = host.Services.GetService<UserArgumentService>();
+            var logger = host.Services.GetService<ILogger<Program>>();
 
-            //logger.LogInformation("User param is {test} ", userArguments.Test2);
+            logger.LogInformation("User param is {test} ", userArguments.Test2);
         }
     }
 }

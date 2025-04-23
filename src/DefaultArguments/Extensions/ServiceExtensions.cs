@@ -15,37 +15,59 @@ namespace DefaultArguments.Extensions
     public static class ServiceExtensions
     {
         
-        public static IServiceCollection AddArgumentsParserService(this IServiceCollection services)
+        public static IServiceCollection AddArgumentsParserService(this IServiceCollection services, string[] args)
         {
-            services.AddSingleton<IArgumentsParserService, ArgumentsParserService>();
+            ArgumentsParserService parserService = new();
+            Parser parser = parserService.Parser;
 
-            /*Parser.Default.ParseArguments<DefaultArgumentsService>(args)
-                .WithParsed(appArgs =>
-                {
-                    services.AddTransient<IDefaultArgumentsService>(app => appArgs);
-                });
-            */
+            var parserResult = parser.ParseArguments<object>(args);
+            parserResult.WithNotParsed(HandleErrors);
+
             return services;
         }
+
+        public static IServiceCollection AddArgumentsParserService(this IServiceCollection services, object instance, string[] args)
+        {
+            ArgumentsParserService parserService = new();
+            Parser parser = parserService.Parser;
+
+            var type = instance.GetType();
+            Type[] types = [type];
+
+            ParserResult<object> parserResult = parser.ParseArguments(args, types);
+
+            object s = instance;
+
+            parserResult.WithParsed(result => 
+            {
+                s = result;
+            });
+
+            parserResult.WithNotParsed(HandleErrors);
+
+            services.AddSingleton(type, s);
+
+            return services;
+        }
+
 
         public static void UseAdamDefaultArguments(this IHost host, string[] args) 
         {
             IServiceProvider serviceProvider = host.Services;
             IArgumentsParserService argumentParser = serviceProvider.GetRequiredService<IArgumentsParserService>();
 
-            ParserResult<Arguments> parserResult = argumentParser.Parser.ParseArguments<Arguments>(args);
+            var parserResult = argumentParser.Parser.ParseArguments<object>(args);
             
             parserResult.WithNotParsed(HandleErrors);
         }
 
-        public static void UseAdamDefaultArguments(this IHost host, object instance, string[] args)
+        public static void UseAdamDefaultArguments(this IHost host, Type instance, string[] args)
         {
             IServiceProvider serviceProvider = host.Services;
             IArgumentsParserService argumentParser = serviceProvider.GetRequiredService<IArgumentsParserService>();
             
-            
-            var type = instance.GetType();
-            Type[] types = [type];
+            //var type = instance.GetType();
+            Type[] types = [instance];
             var parserResult = argumentParser.Parser.ParseArguments(args, types);
 
             parserResult.WithNotParsed(HandleErrors);
@@ -60,5 +82,13 @@ namespace DefaultArguments.Extensions
         {
             return HelpText.AutoBuild(parserResult, h => h, e => e);
         }
+
+
+        /*Parser.Default.ParseArguments<DefaultArgumentsService>(args)
+            .WithParsed(appArgs =>
+            {
+                services.AddTransient<IDefaultArgumentsService>(app => appArgs);
+            });
+        */
     }
 }

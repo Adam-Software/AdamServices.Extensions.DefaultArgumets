@@ -6,8 +6,8 @@ using System;
 
 namespace DefaultArguments.TestApp.Services
 {
-    [Verb("add", HelpText = "Add file contents to the index.")]
-    public class UserArgumentService //:  IUserArgumentService
+    [Verb("userparam", true, HelpText = "Add file contents to the index.")]
+    public class UserArgumentService :  IUserArgumentService
     {
         public UserArgumentService() 
         {
@@ -21,7 +21,7 @@ namespace DefaultArguments.TestApp.Services
             //logger.LogInformation("Default test param is {test}", defaultArgumentService.Test1);
         }
 
-        [Option(shortName: 's', longName: "test2", Required = true, HelpText = "Test2")]
+        [Option(shortName: 's', longName: "test2", Required = false, HelpText = "Test2")]
         public bool Test2 { get; set; }
     }
 }
