@@ -1,27 +1,15 @@
 ﻿using CommandLine;
-using DefaultArguments.Service;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
 
 namespace DefaultArguments.TestApp.Services
 {
-    [Verb("userparam", true, HelpText = "Add file contents to the index.")]
-    public class UserArgumentService :  IUserArgumentService
+    [Verb("customparam", true)]
+    public class UserArgumentService
     {
-        public UserArgumentService() 
-        {
-            //this.Test2 = Test2;
-            //IDefaultArgumentsService defaultArgumentService = serviceProvider.GetService<IDefaultArgumentsService>();
-            //ILogger<UserArgumentService> logger = serviceProvider.GetService<ILogger<UserArgumentService>>();
-            //IArgumentsParserService argumentsParserService = serviceProvider.GetService<IArgumentsParserService>();
-            //var parser = argumentsParserService.Parser;
-
-
-            //logger.LogInformation("Default test param is {test}", defaultArgumentService.Test1);
-        }
 
         [Option(shortName: 's', longName: "test2", Required = false, HelpText = "Test2")]
         public bool Test2 { get; set; }
+
+        [Option(shortName: 'q', longName: "test3", Required = false, HelpText = "Test3")]
+        public bool Test3 { get; set; }
     }
 }

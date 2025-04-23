@@ -1,10 +1,9 @@
 ﻿
-using Microsoft.Extensions.Hosting;
 using DefaultArguments.Extensions;
-using Microsoft.Extensions.DependencyInjection;
 using DefaultArguments.TestApp.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using DefaultArguments.Service;
 
 namespace DefaultArguments.TestApp
 {
@@ -15,19 +14,12 @@ namespace DefaultArguments.TestApp
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                  {
-                     //services.AddArgumentsParserService(args);
-
                      UserArgumentService userArgumentService = new();
-                     services.AddArgumentsParserService(userArgumentService, args);
-                     //services.AddSingleton<IUserArgumentService>(userArgumentService);
-                
+                     services.AddArgumentsParserService(userArgumentService, args);   
                  })
                 
                  .Build();
 
-            //UserArgumentService userArgumentService = new();
-            //host.UseAdamDefaultArguments(args);
-            //host.UseAdamDefaultArguments(typeof(UserArgumentService), args);
             host.RunAsync();
 
             var userArguments = host.Services.GetService<UserArgumentService>();
