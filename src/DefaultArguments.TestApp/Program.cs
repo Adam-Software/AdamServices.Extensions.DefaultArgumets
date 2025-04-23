@@ -1,5 +1,4 @@
-﻿
-using DefaultArguments.Extensions;
+﻿using DefaultArguments.Extensions;
 using DefaultArguments.TestApp.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,21 +10,30 @@ namespace DefaultArguments.TestApp
     {
         static void Main(string[] args)
         {
-            var host = Host.CreateDefaultBuilder()
+            IHost host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                  {
-                     UserArgumentService userArgumentService = new();
-                     services.AddArgumentsParserService(userArgumentService, args);   
+                     //added default parser without service
+                     //services.AddAdamDefaultArgumentsParser(args);
+
+                     //added T as transient service
+                     services.AddAdamArgumentsParserTransient<ArgumentService>(args);   
                  })
                 
                  .Build();
 
             host.RunAsync();
 
-            var userArguments = host.Services.GetService<UserArgumentService>();
+            ExampleReadArguments(host);
+        }
+
+        private static void ExampleReadArguments(IHost host)
+        {
+            var userArguments = host.Services.GetService<ArgumentService>();
             var logger = host.Services.GetService<ILogger<Program>>();
 
-            logger.LogInformation("User param is {test} ", userArguments.Test2);
+            logger.LogInformation("User argument test2 is {result} ", userArguments.Test2);
+            logger.LogInformation("User argument test3 is {result} ", userArguments.Test3);
         }
     }
 }

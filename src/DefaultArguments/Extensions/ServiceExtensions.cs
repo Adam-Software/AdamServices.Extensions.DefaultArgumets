@@ -6,31 +6,28 @@ namespace DefaultArguments.Extensions
 {
     public static class ServiceExtensions
     {
-        
-        public static IServiceCollection AddArgumentsParserService(this IServiceCollection services, string[] args)
+        private readonly static Parser mParser = new(config => config.HelpWriter = Console.Out);
+
+        public static IServiceCollection AddAdamDefaultArgumentsParser(this IServiceCollection services, string[] args)
         {
-            Parser parser = new(config => config.HelpWriter = Console.Out);
-            _ = parser.ParseArguments<object>(args);
+            _ = mParser.ParseArguments<object>(args);
 
             return services;
         }
 
-        public static IServiceCollection AddArgumentsParserService(this IServiceCollection services, object instance, string[] args)
+        public static IServiceCollection AddAdamArgumentsParserTransient<T>(this IServiceCollection services, string[] args) where T : class
         {
-            Parser parser = new(config => config.HelpWriter = Console.Out);
-            Type type = instance.GetType();
-            Type[] types = [type];
-
-            ParserResult<object> parserResult = parser.ParseArguments(args, types);
+            Type instanceType = typeof(T);
+            object instance = Activator.CreateInstance(instanceType);
+            ParserResult<object> parserResult = mParser.ParseArguments(args, [instanceType]);
 
             object resultInstance = instance;
-
-            parserResult.WithParsed(result => 
+            parserResult.WithParsed(result =>
             {
                 resultInstance = result;
             });
 
-            services.AddSingleton(type, resultInstance);
+            services.AddTransient(instanceType, factory => resultInstance);
 
             return services;
         }

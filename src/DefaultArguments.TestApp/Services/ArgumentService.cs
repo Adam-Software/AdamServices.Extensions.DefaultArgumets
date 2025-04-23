@@ -2,8 +2,8 @@
 
 namespace DefaultArguments.TestApp.Services
 {
-    [Verb("customparam", true)]
-    public class UserArgumentService
+    [Verb("ArgumentService", true)]
+    public class ArgumentService
     {
 
         [Option(shortName: 's', longName: "test2", Required = false, HelpText = "Test2")]
