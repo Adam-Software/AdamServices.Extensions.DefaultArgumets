@@ -2,7 +2,7 @@
 
 namespace DefaultArguments.TestApp.Services
 {
-    [Verb("ArgumentService", true)]
+    [Verb("arguments", isDefault: true, Hidden = false, HelpText = "Use 'arguments --help' for view command")]
     public class ArgumentService
     {
 
