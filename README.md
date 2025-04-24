@@ -76,7 +76,7 @@ public class ArgumentService
 }
 
 ```
-### Host behavior when parsing arguments
+## Host behavior when parsing arguments
 
 Successful parsing
 * the host continues to work
