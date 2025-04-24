@@ -41,13 +41,38 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
   {
      services.AddAdamArgumentsParserTransient<ArgumentService>(args);
   })
-  ```
-  `ArgumentService` is the `CommandLine.VerbAttribute` class.    
-  This will add a transient service `ArgumentService` which can be obtained using standard methods via ServiceProvider
+  ```  
+  This will add a transient service `ArgumentService` which can be obtained using standard methods via ServiceProvider. Learn more about custom arguments class [here](#example-custom-arguments-class)
   ```c#
   var userArguments = host.Services.GetService<ArgumentService>();
   ```
 
-* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`
+* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`. This will change the behavior of the host depending on the result of parsing command line parameters.
 
 An example can be viewed in the [test](https://github.com/Adam-Software/AdamServices.Extensions.DefaultArgumets/tree/master/src/DefaultArguments.TestApp) project.
+
+### Custom arguments class
+The parameter class consists of fields marked with the `Option` attribute. The attribute parameters are described [here](https://github.com/commandlineparser/commandline/wiki/Option-Attribute)
+
+### Limitations of the parameter class
+* The command line parameter class must be marked with the `CommandLine.VerbAttribute` with the optional `IsDefault` parameter: `true`
+  ```c#
+  [Verb("arguments", isDefault: true)]
+  ```
+* The command line parameter class must be public.
+* The parameter class must not have constructors or have a constructor without parameters.
+
+### Example custom arguments class
+```C#
+
+[Verb("arguments", isDefault: true)]
+public class ArgumentService
+{
+    [Option(shortName: 's', longName: "test", Required = false, HelpText = "Test")]
+    public bool Test { get; set; }
+
+    [Option(shortName: 'q', longName: "test2", Required = false, HelpText = "Test2")]
+    public bool Test2 { get; set; }
+}
+
+```
