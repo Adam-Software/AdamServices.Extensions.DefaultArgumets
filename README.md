@@ -42,6 +42,12 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
      services.AddAdamArgumentsParserTransient<ArgumentService>(args);
   })
   ```
-  `ArgumentService` is the `CommandLine.VerbAttribute` class.
+  `ArgumentService` is the `CommandLine.VerbAttribute` class.    
+  This will add a transient service `ArgumentService` which can be obtained using standard methods via ServiceProvider
+  ```c#
+  var userArguments = host.Services.GetService<ArgumentService>();
+  ```
 
 * Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`
+
+An example can be viewed in the [test](https://github.com/Adam-Software/AdamServices.Extensions.DefaultArgumets/tree/master/src/DefaultArguments.TestApp) project.
