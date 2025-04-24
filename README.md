@@ -8,3 +8,38 @@ The library for parsing command line arguments of Adam Services projects is an e
 
 Use the shared [wiki](https://github.com/Adam-Software/AdamServices.Utilities.Managment/wiki) to find information about the project.
 
+## For users
+
+### Install
+
+.NET CLI
+```cmd
+dotnet add package AdamServices.Extensions.DefaultArguments
+```
+
+Package Manager
+```cmd
+NuGet\Install-Package AdamServices.Extensions.DefaultArguments
+```
+
+### Update the configuration of the DI project
+
+* Add DefaultArguments initialization to the service configurations
+   
+  **Method 1.** If the application does not have command line options
+  ```c#
+  .ConfigureServices((context, services) =>
+  {
+     services.AddAdamDefaultArgumentsParser(args);  
+  })
+  ```
+  This will add default command line options such as `--help` and `--version`.
+
+  **Method 2.** If the application has command line options
+  ```c#
+  .ConfigureServices((context, services) =>
+  {
+     services.AddAdamArgumentsParserTransient<ArgumentService>(args);
+  })
+  ```
+  `ArgumentService` is the `CommandLine.VerbAttribute` class.
