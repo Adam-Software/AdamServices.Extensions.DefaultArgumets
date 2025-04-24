@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(SolutionName)</Title>
     <Description>Command line parser for AdamServices projects</Description>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <PackageId>$(SolutionName)</PackageId>
     <Authors>vertigra</Authors>
     <Product>$(SolutionName)</Product>
