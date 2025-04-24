@@ -35,7 +35,7 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
   ```
   This will add default command line options such as `--help` and `--version`.
 
-  **Method 2.** If the application has command line options
+  **Method 2.** If the application has command line options        
   ```c#
   .ConfigureServices((context, services) =>
   {
@@ -43,3 +43,5 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
   })
   ```
   `ArgumentService` is the `CommandLine.VerbAttribute` class.
+
+* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`
