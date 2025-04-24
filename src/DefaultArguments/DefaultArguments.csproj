@@ -11,6 +11,10 @@
     <PackageId>$(SolutionName)</PackageId>
     <Authors>vertigra</Authors>
     <Product>$(SolutionName)</Product>
+    <PackageTags>adamservices; adamservices-extensions</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Adam-Software/AdamServices.Extensions.DefaultArgumets</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
