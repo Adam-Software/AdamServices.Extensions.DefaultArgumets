@@ -20,9 +20,7 @@ namespace DefaultArguments.Utilties
         {
             if (errs.IsVersion())
             {
-                string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
                 Console.WriteLine(AssemblyUtilties.ShortVersion);
-
                 return;
             }
 
