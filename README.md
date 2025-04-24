@@ -6,3 +6,5 @@
 
 The library for parsing command line arguments of Adam Services projects is an extension for Microsoft Dependency Injection (DI)
 
+Use the shared [wiki](https://github.com/Adam-Software/AdamServices.Utilities.Managment/wiki) to find information about the project.
+
