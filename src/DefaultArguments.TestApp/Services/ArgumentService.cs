@@ -2,10 +2,9 @@
 
 namespace DefaultArguments.TestApp.Services
 {
-    [Verb("arguments", isDefault: true, Hidden = false, HelpText = "Use 'arguments --help' for view command")]
+    [Verb("arguments", isDefault: true, Hidden = false)]
     public class ArgumentService
     {
-
         [Option(shortName: 's', longName: "test2", Required = false, HelpText = "Test2")]
         public bool Test2 { get; set; }
 

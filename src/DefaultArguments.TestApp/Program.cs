@@ -3,28 +3,28 @@ using DefaultArguments.TestApp.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace DefaultArguments.TestApp
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             IHost host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                  {
                      //added default parser without service
-                     //services.AddAdamDefaultArgumentsParser(args);
+                     services.AddAdamDefaultArgumentsParser(args);
 
                      //added T as transient service
-                     services.AddAdamArgumentsParserTransient<ArgumentService>(args);   
+                     //services.AddAdamArgumentsParserTransient<ArgumentService>(args);   
                  })
-                
                  .Build();
 
-            host.RunAsync();
+            await host.ParseAndRunAsync();
 
-            ExampleReadArguments(host);
+            //ExampleReadArguments(host);
         }
 
         private static void ExampleReadArguments(IHost host)
