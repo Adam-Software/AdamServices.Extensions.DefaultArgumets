@@ -9,6 +9,7 @@
     <Title>$(SolutionName)</Title>
     <Authors>vertigra</Authors>
     <Product>$(SolutionName)</Product>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
