@@ -73,4 +73,3 @@ jobs:
         prerelease: false
         files: |
             nupkgs/*.nupkg
-            *.json
