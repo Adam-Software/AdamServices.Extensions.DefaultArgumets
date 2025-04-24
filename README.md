@@ -35,14 +35,14 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
   ```
   This will add default command line options such as `--help` and `--version`.
 
-  **Method 2.** If the application has command line options        
+  **Method 2.** If the application has command line options you should add custom arguments class. Learn more about custom arguments class [here](#example-custom-arguments-class).     
   ```c#
   .ConfigureServices((context, services) =>
   {
      services.AddAdamArgumentsParserTransient<ArgumentService>(args);
   })
   ```  
-  This will add a transient service `ArgumentService` which can be obtained using standard methods via ServiceProvider. Learn more about custom arguments class [here](#example-custom-arguments-class)
+  This will add a transient service `ArgumentService` which can be obtained using standard methods via `ServiceProvider`. 
   ```c#
   var userArguments = host.Services.GetService<ArgumentService>();
   ```
