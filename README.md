@@ -47,11 +47,11 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
   var userArguments = host.Services.GetService<ArgumentService>();
   ```
 
-* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`. This will change the behavior of the host depending on the result of parsing command line parameters.
+* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`. This will change the behavior of the host depending on the result of parsing command line parameters. Read more about it [here](#host-behavior-when-parsing-arguments)
 
 An example can be viewed in the [test](https://github.com/Adam-Software/AdamServices.Extensions.DefaultArgumets/tree/master/src/DefaultArguments.TestApp) project.
 
-### Custom arguments class
+## Custom arguments class
 The parameter class consists of fields marked with the `Option` attribute. The attribute parameters are described [here](https://github.com/commandlineparser/commandline/wiki/Option-Attribute)
 
 ### Limitations of the parameter class
@@ -76,3 +76,13 @@ public class ArgumentService
 }
 
 ```
+### Host behavior when parsing arguments
+
+Successful parsing
+* the host continues to work
+* the custom arguments class fields are filled with values from the command line
+
+Unsuccessful parsing
+* the host stops working
+* the parser shows the argument that caused the error.
+* the parser shows the automatically generated help
