@@ -89,7 +89,7 @@ The parameter class consists of fields marked with the `Option` attribute. The a
 * The command line parameter class must be public.
 * The parameter class must not have constructors or have a constructor without parameters.
 
-### Example custom arguments class
+#### Example custom arguments class
 ```C#
 
 [Verb("arguments", isDefault: true)]
