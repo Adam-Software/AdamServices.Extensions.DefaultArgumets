@@ -47,11 +47,11 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
   var userArguments = host.Services.GetService<ArgumentService>();
   ```
 
-* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`. This will change the behavior of the host depending on the result of parsing command line parameters. Read more about it [here].(#host-behavior-when-parsing-arguments)
+* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`. This will change the behavior of the host depending on the result of parsing command line parameters. Read more about it [here](#host-behavior-when-parsing-arguments).
 
 An example can be viewed in the [test](https://github.com/Adam-Software/AdamServices.Extensions.DefaultArgumets/tree/master/src/DefaultArguments.TestApp) project.
 
-## Default argument
+### Default argument
 
 * `--help`
   
@@ -76,12 +76,12 @@ An example can be viewed in the [test](https://github.com/Adam-Software/AdamServ
   ```
   
 * `--version`    
-  Returns the application version in the format `Version.Major`.`Version.Minor`.`Version.Build`. **The build version will not be displayed, even if it is specified in the project.**
+  Returns the application version in the format `Version.Major`.`Version.Minor`.`Version.Build`. **The `revision` version will not be displayed, even if it is specified in the project.**
 
-## Custom arguments class
+### Custom arguments class
 The parameter class consists of fields marked with the `Option` attribute. The attribute parameters are described [here](https://github.com/commandlineparser/commandline/wiki/Option-Attribute)
 
-### Limitations of the parameter class
+#### Limitations of the parameter class
 * The command line parameter class must be marked with the `CommandLine.VerbAttribute` with the optional `IsDefault` parameter: `true`
   ```c#
   [Verb("arguments", isDefault: true)]
@@ -103,13 +103,49 @@ public class ArgumentService
 }
 
 ```
-## Host behavior when parsing arguments
+### Host behavior when parsing arguments
 
 Successful parsing
 * the host continues to work
 * the custom arguments class fields are filled with values from the command line
 
 Unsuccessful parsing
-* the host stops working
 * the parser shows the argument that caused the error.
 * the parser shows the automatically generated help
+* the host stops working
+
+When parsing the default arguments --help and --version
+* the parser shows the automatically generated help or version
+* the host stops working
+
+## For developers
+
+### Publishing releases
+
+To publish a release, you need to:
+
+* Upgrade the version in the project configuration and commit the changes
+  ```xml
+  <PropertyGroup>
+    ...
+    <Version>1.0.1</Version>
+    ...
+  </PropertyGroup>
+  ```
+  Version format X.X.X
+* Mark the commit with a tag of the format: v.X.X.X
+  e.g. version 1.0.1 tag v.1.0.1
+* Push commits and tags. The release will be published automatically.
+
+Important!
+
+* Technically, it doesn't matter which version is specified in the project configuration, the version number is taken from the tag. They may differ, for example, as a result of an error or carelessness. Preference should be given to the version specified in the tag.
+* The trigger for publishing a release is a xxx format tag. From any branch.
+
+### What's going on at CI?
+
+* Building a library with a project and a test application to which the library is linked via a link to the project
+* Packaging the library in a nuget package
+* Launching a test application that creates a file, services_info.json with fields filled in by default
+* Publishing packages on nuget and github package
+* Publication of the release to which the following are attached: source codes, nuget package version, services_info.json file with fields filled in by default
