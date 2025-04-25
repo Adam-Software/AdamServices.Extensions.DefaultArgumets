@@ -149,3 +149,6 @@ Important!
 * Launching a test application that creates a file, services_info.json with fields filled in by default
 * Publishing packages on nuget and github package
 * Publication of the release to which the following are attached: source codes, nuget package version, services_info.json file with fields filled in by default
+
+## Thanks
+[@ericnewton76](https://github.com/ericnewton76) for [commandlineparser](https://github.com/commandlineparser)
