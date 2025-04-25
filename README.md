@@ -51,6 +51,32 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
 
 An example can be viewed in the [test](https://github.com/Adam-Software/AdamServices.Extensions.DefaultArgumets/tree/master/src/DefaultArguments.TestApp) project.
 
+## Default argument
+
+* `--help`
+  
+  When used without specifying the custom arguments class, the --help argument will display
+  ```cmd
+  AppName AppVersion
+  Copyright (C) 2025 AppCopyright
+  
+  --help       Display this help screen.
+  --version    Display version information.
+  ```
+  
+  When used wit specifying the custom arguments class, ex. [ArgumentService](#example-custom-arguments-class), the --help argument will display
+    ```cmd
+  AppName AppVersion
+  Copyright (C) 2025 AppCopyright
+
+  -s --test    Test
+  -q --test2   Test2
+  --help       Display this help screen.
+  --version    Display version information.
+  ```
+  
+* `--version`
+
 ## Custom arguments class
 The parameter class consists of fields marked with the `Option` attribute. The attribute parameters are described [here](https://github.com/commandlineparser/commandline/wiki/Option-Attribute)
 
