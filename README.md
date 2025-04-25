@@ -24,7 +24,7 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
 
 ### Update the configuration of the DI project
 
-* Add DefaultArguments initialization to the service configurations
+* Add DefaultArguments initialization to the service configurations. Default arguments will be added to both methods. Read more [here](#default-argument)
    
   **Method 1.** If the application does not have command line options
   ```c#
@@ -75,7 +75,8 @@ An example can be viewed in the [test](https://github.com/Adam-Software/AdamServ
   --version    Display version information.
   ```
   
-* `--version`
+* `--version`    
+  Returns the application version in the format `Version.Major`.`Version.Minor`.`Version.Build`. **The build version will not be displayed, even if it is specified in the project.**
 
 ## Custom arguments class
 The parameter class consists of fields marked with the `Option` attribute. The attribute parameters are described [here](https://github.com/commandlineparser/commandline/wiki/Option-Attribute)
