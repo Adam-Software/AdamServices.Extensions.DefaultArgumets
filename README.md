@@ -4,7 +4,7 @@
 ![GitHub Release](https://img.shields.io/github/v/release/Adam-Software/AdamServices.Extensions.DefaultArgumets)
 ![NuGet Version](https://img.shields.io/nuget/v/AdamServices.Extensions.DefaultArgumets)
 
-The library for parsing command line arguments of Adam Services projects is an extension for Microsoft Dependency Injection (DI)
+A library for parsing command line arguments. It automatically generates and displays the application version, application name, and copyright. It also adds two parameters `--help` and `--version`. If you use custom arguments, help will be automatically generated for them. Is an extension for Microsoft Dependency Injection (DI).
 
 Use the shared [wiki](https://github.com/Adam-Software/AdamServices.Utilities.Managment/wiki) to find information about the project.
 
