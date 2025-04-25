@@ -24,7 +24,7 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
 
 ### Update the configuration of the DI project
 
-* Add DefaultArguments initialization to the service configurations. Default arguments will be added to both methods. Read more [here](#default-argument)
+* Add DefaultArguments initialization to the service configurations. Default arguments will be added when using both methods. Read more [here](#default-argument)
    
   **Method 1.** If the application does not have command line options
   ```c#
@@ -47,7 +47,7 @@ NuGet\Install-Package AdamServices.Extensions.DefaultArguments
   var userArguments = host.Services.GetService<ArgumentService>();
   ```
 
-* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`. This will change the behavior of the host depending on the result of parsing command line parameters. Read more about it [here](#host-behavior-when-parsing-arguments)
+* Change the way the host is started, such as `host.Run()` or `host.RunAsync()` on the `host.ParseAndRun()` or `host.ParseAndRunAsync()`. This will change the behavior of the host depending on the result of parsing command line parameters. Read more about it [here].(#host-behavior-when-parsing-arguments)
 
 An example can be viewed in the [test](https://github.com/Adam-Software/AdamServices.Extensions.DefaultArgumets/tree/master/src/DefaultArguments.TestApp) project.
 
