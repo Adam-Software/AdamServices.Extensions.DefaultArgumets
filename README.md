@@ -14,12 +14,12 @@ Use the shared [wiki](https://github.com/Adam-Software/AdamServices.Utilities.Ma
 
 .NET CLI
 ```cmd
-dotnet add package AdamServices.Extensions.DefaultArguments
+dotnet add package AdamServices.Extensions.DefaultArgumets
 ```
 
 Package Manager
 ```cmd
-NuGet\Install-Package AdamServices.Extensions.DefaultArguments
+NuGet\Install-Package AdamServices.Extensions.DefaultArgumets
 ```
 
 ### Update the configuration of the DI project
