@@ -6,7 +6,7 @@
     <Nullable>disable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(SolutionName)</Title>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <PackageId>$(SolutionName)</PackageId>
     <Authors>vertigra</Authors>
     <Product>$(SolutionName)</Product>
